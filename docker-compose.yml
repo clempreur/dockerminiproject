@@ -9,6 +9,8 @@ services:
     build:
       # Here we define that it should build from the current directory
       context: ./API/
+      dockerfile: ./API/Dockerfile
+
     environment:
       # Variables to connect to our Postgres server
       PGUSER: postgres
@@ -26,6 +28,7 @@ services:
   vuejs:
     build:
       context: ./VueJS/test/
+      dockerfile: ./VueJS/test/Dockerfile
     ports:
        - "4002:8080"
   db:
