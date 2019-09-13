@@ -26,3 +26,4 @@ before_install:
   - docker-compose build phoenix
   - docker-compose build
   - docker-compose up
+  
