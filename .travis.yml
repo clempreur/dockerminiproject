@@ -23,6 +23,6 @@ env:
   - docker-compose --version
 
 before_install:
-  - docker-compose build ./API/
-  - docker-compose build ./VueJS/test/
+  - docker-compose build phoenix
+  - docker-compose build vuejs
   - docker-compose up
