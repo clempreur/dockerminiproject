@@ -1,7 +1,8 @@
 services:
   - docker
+  - docker-compose
 
 before_install:
-  - docker-compose build ./API
-  - docker-compose build ./VueJS/test
+  - docker-compose build ./API/
+  - docker-compose build ./VueJS/test/
   - docker-compose up
