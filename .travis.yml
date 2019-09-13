@@ -1,5 +1,4 @@
 install:
     - sudo pip install docker-compose
-    - docker-compose phoenix
-    - docker-compose vuejs
+    - docker-compose
     - docler-compose up
