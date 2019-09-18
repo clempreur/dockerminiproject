@@ -3,5 +3,5 @@ language: python
 services:
         - docker
         - docker-compose
-deploy:
-        - docker-compose up -d
+script:
+        - docker-compose build -d
