@@ -18,15 +18,15 @@ services:
       PGHOST: db
     ports:
       # Mapping the port to make the Phoenix app accessible outside of the container
-      - "4001:4000"
+      - "4000:4000"
     depends_on:
       # The db container needs to be started before we start this container
       - db
   vuejs:
     build:
-      context: ./VueJS/test/
+      context: ./VueJS/
     ports:
-       - "4002:8080"
+       - "8080:8080"
   db:
     # We use the predefined Postgres image
     image: postgres:latest
