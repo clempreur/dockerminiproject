@@ -18,7 +18,7 @@ script:
   - docker-compose ps
 
 # if the build is successful, ssh into the server and execute deploy.sh which 
-# will deploy our modifications
+# will deploy our modifications online
 
 deploy:
   provider: script
