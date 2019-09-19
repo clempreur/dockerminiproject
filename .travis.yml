@@ -1,0 +1,27 @@
+# ensure that docker is available on the travis machine
+services:
+  - docker
+
+# our ec2 hostname
+addons:
+  ssh_known_hosts: ec2-54-174-174-127.compute-1.amazonaws.com
+
+# decrypt the .pem file which is necessary in order to ssh into our ec2 server.
+before_install:
+openssl aes-256-cbc -K $encrypted_20e5e78cf37c_key -iv $encrypted_20e5e78cf37c_iv -in dockerminiproject.pem.enc -out dockerminiproject.pem -d  - chmod 400 /tmp/dockerminiproject.pem
+
+# build steps
+script:
+  - docker-compose up -d db
+  - docker-compose build phoenix vuejs
+  - docker-compose up -d
+  - docker-compose ps
+
+# if the build is successful, ssh into the server and execute deploy.sh which 
+# will deploy our modifications
+
+deploy:
+  provider: script
+  skip-cleanup: true
+  script: ssh -i "/temp/dockerminiproject.pem" ec2-user@ec2-54-174-174-127.compute-1.amazonaws.com sh dockerminiproject/dockerinit.sh
+
