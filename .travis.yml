@@ -8,7 +8,7 @@ addons:
 
 # decrypt the .pem file which is necessary in order to ssh into our ec2 server.
 before_install:
- - openssl aes-256-cbc -K $encrypted_20e5e78cf37c_key -iv $encrypted_20e5e78cf37c_iv -in dockerminiproject.pem.enc -out dockerminiproject.pem -d
+ - openssl aes-256-cbc -K $encrypted_20e5e78cf37c_key -iv $encrypted_20e5e78cf37c_iv -in dockerminiproject.pem.enc -out /tmp/dockerminiproject.pem -d
  - chmod 400 /tmp/dockerminiproject.pem
 
 # build steps
