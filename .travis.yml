@@ -23,5 +23,5 @@ script:
 deploy:
   provider: script
   skip-cleanup: true
-  script: ssh -i "/temp/dockerminiproject.pem" ec2-user@ec2-54-174-174-127.compute-1.amazonaws.com sh dockerminiproject/dockerinit.sh
+  script: ssh -i "/tmp/dockerminiproject.pem" ec2-user@ec2-54-174-174-127.compute-1.amazonaws.com sh dockerminiproject/dockerinit.sh
 
