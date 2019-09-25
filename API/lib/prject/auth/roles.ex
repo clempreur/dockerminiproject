@@ -5,7 +5,7 @@ defmodule Worktime.Auth.Roles do
   schema "roles" do
     field :label, :string
     field :status, :integer
-    has_many :users, Worktime.Auth.Users, on_replace: :update
+    has_many :users, Worktime.Auth.Users, on_replace: :raise
 
     timestamps()
   end

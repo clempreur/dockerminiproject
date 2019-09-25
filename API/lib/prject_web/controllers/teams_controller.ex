@@ -3,7 +3,6 @@ defmodule WorktimeWeb.TeamsController do
 
   alias Worktime.Auth
   alias Worktime.Auth.Teams
-  alias Worktime.Auth.Users
 
   action_fallback WorktimeWeb.FallbackController
 

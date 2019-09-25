@@ -354,7 +354,7 @@ defmodule Worktime.Auth do
     if user do
       user.workingtimes
     else
-      %{"id": false}
+      %{id: false}
     end
 
   end
@@ -368,7 +368,7 @@ defmodule Worktime.Auth do
     if user do
       user.workingtimes
     else
-      %{"id": false}
+      %{id: false}
     end
   end
 
