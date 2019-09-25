@@ -5,7 +5,7 @@ config :prject, Worktime.Repo,
   username: "postgres",
   password: "postgres", #rajouter mot de passe
   database: "mini",
-  hostname: "db",
+  hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

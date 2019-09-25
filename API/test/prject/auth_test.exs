@@ -183,4 +183,181 @@ defmodule Worktime.AuthTest do
       assert %Ecto.Changeset{} = Auth.change_workingtimes(workingtimes)
     end
   end
+
+  describe "roles" do
+    alias Worktime.Auth.Roles
+
+    @valid_attrs %{label: "some label", status: 42}
+    @update_attrs %{label: "some updated label", status: 43}
+    @invalid_attrs %{label: nil, status: nil}
+
+    def roles_fixture(attrs \\ %{}) do
+      {:ok, roles} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Auth.create_roles()
+
+      roles
+    end
+
+    test "list_roles/0 returns all roles" do
+      roles = roles_fixture()
+      assert Auth.list_roles() == [roles]
+    end
+
+    test "get_roles!/1 returns the roles with given id" do
+      roles = roles_fixture()
+      assert Auth.get_roles!(roles.id) == roles
+    end
+
+    test "create_roles/1 with valid data creates a roles" do
+      assert {:ok, %Roles{} = roles} = Auth.create_roles(@valid_attrs)
+      assert roles.label == "some label"
+      assert roles.status == 42
+    end
+
+    test "create_roles/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Auth.create_roles(@invalid_attrs)
+    end
+
+    test "update_roles/2 with valid data updates the roles" do
+      roles = roles_fixture()
+      assert {:ok, %Roles{} = roles} = Auth.update_roles(roles, @update_attrs)
+      assert roles.label == "some updated label"
+      assert roles.status == 43
+    end
+
+    test "update_roles/2 with invalid data returns error changeset" do
+      roles = roles_fixture()
+      assert {:error, %Ecto.Changeset{}} = Auth.update_roles(roles, @invalid_attrs)
+      assert roles == Auth.get_roles!(roles.id)
+    end
+
+    test "delete_roles/1 deletes the roles" do
+      roles = roles_fixture()
+      assert {:ok, %Roles{}} = Auth.delete_roles(roles)
+      assert_raise Ecto.NoResultsError, fn -> Auth.get_roles!(roles.id) end
+    end
+
+    test "change_roles/1 returns a roles changeset" do
+      roles = roles_fixture()
+      assert %Ecto.Changeset{} = Auth.change_roles(roles)
+    end
+  end
+
+  describe "teams" do
+    alias Worktime.Auth.Teams
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def teams_fixture(attrs \\ %{}) do
+      {:ok, teams} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Auth.create_teams()
+
+      teams
+    end
+
+    test "list_teams/0 returns all teams" do
+      teams = teams_fixture()
+      assert Auth.list_teams() == [teams]
+    end
+
+    test "get_teams!/1 returns the teams with given id" do
+      teams = teams_fixture()
+      assert Auth.get_teams!(teams.id) == teams
+    end
+
+    test "create_teams/1 with valid data creates a teams" do
+      assert {:ok, %Teams{} = teams} = Auth.create_teams(@valid_attrs)
+      assert teams.name == "some name"
+    end
+
+    test "create_teams/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Auth.create_teams(@invalid_attrs)
+    end
+
+    test "update_teams/2 with valid data updates the teams" do
+      teams = teams_fixture()
+      assert {:ok, %Teams{} = teams} = Auth.update_teams(teams, @update_attrs)
+      assert teams.name == "some updated name"
+    end
+
+    test "update_teams/2 with invalid data returns error changeset" do
+      teams = teams_fixture()
+      assert {:error, %Ecto.Changeset{}} = Auth.update_teams(teams, @invalid_attrs)
+      assert teams == Auth.get_teams!(teams.id)
+    end
+
+    test "delete_teams/1 deletes the teams" do
+      teams = teams_fixture()
+      assert {:ok, %Teams{}} = Auth.delete_teams(teams)
+      assert_raise Ecto.NoResultsError, fn -> Auth.get_teams!(teams.id) end
+    end
+
+    test "change_teams/1 returns a teams changeset" do
+      teams = teams_fixture()
+      assert %Ecto.Changeset{} = Auth.change_teams(teams)
+    end
+  end
+
+  describe "teamshasusers" do
+    alias Worktime.Auth.TeamshasUsers
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def teamshas_users_fixture(attrs \\ %{}) do
+      {:ok, teamshas_users} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Auth.create_teamshas_users()
+
+      teamshas_users
+    end
+
+    test "list_teamshasusers/0 returns all teamshasusers" do
+      teamshas_users = teamshas_users_fixture()
+      assert Auth.list_teamshasusers() == [teamshas_users]
+    end
+
+    test "get_teamshas_users!/1 returns the teamshas_users with given id" do
+      teamshas_users = teamshas_users_fixture()
+      assert Auth.get_teamshas_users!(teamshas_users.id) == teamshas_users
+    end
+
+    test "create_teamshas_users/1 with valid data creates a teamshas_users" do
+      assert {:ok, %TeamshasUsers{} = teamshas_users} = Auth.create_teamshas_users(@valid_attrs)
+    end
+
+    test "create_teamshas_users/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Auth.create_teamshas_users(@invalid_attrs)
+    end
+
+    test "update_teamshas_users/2 with valid data updates the teamshas_users" do
+      teamshas_users = teamshas_users_fixture()
+      assert {:ok, %TeamshasUsers{} = teamshas_users} = Auth.update_teamshas_users(teamshas_users, @update_attrs)
+    end
+
+    test "update_teamshas_users/2 with invalid data returns error changeset" do
+      teamshas_users = teamshas_users_fixture()
+      assert {:error, %Ecto.Changeset{}} = Auth.update_teamshas_users(teamshas_users, @invalid_attrs)
+      assert teamshas_users == Auth.get_teamshas_users!(teamshas_users.id)
+    end
+
+    test "delete_teamshas_users/1 deletes the teamshas_users" do
+      teamshas_users = teamshas_users_fixture()
+      assert {:ok, %TeamshasUsers{}} = Auth.delete_teamshas_users(teamshas_users)
+      assert_raise Ecto.NoResultsError, fn -> Auth.get_teamshas_users!(teamshas_users.id) end
+    end
+
+    test "change_teamshas_users/1 returns a teamshas_users changeset" do
+      teamshas_users = teamshas_users_fixture()
+      assert %Ecto.Changeset{} = Auth.change_teamshas_users(teamshas_users)
+    end
+  end
 end

@@ -1,29 +1,36 @@
 <template>
     <div class="">
-        <h2>Bonjour {{userConnectFirst}} {{userConnectLast}}</h2>
-
-        <b-container class="bv-example-row">
             <b-row>
-                <b-col>
-                    <div class="mt-3">
-                        <b-button-group vertical>
-                            <b-button @click="funCreer" variant="success">Créer un utilisateur</b-button>
-                            <b-button @click="funRecherche" variant="info">Rechercher un utilisateur</b-button>
-                            <b-button @click="funModif" variant="warning">Modifier mon profil</b-button>
-                        </b-button-group>
-                    </div>
-                </b-col>
-                <b-col>
-                    <div v-if="clickCreer">
-                        <b-form-input id="input-1" v-model="newFirstname " required
-                                      placeholder="Enter le prenom"></b-form-input>
-                        <b-form-input id="input-1" v-model="newLastname " required
-                                      placeholder="Enter le nom"></b-form-input>
-                        <b-form-input id="input-1" v-model="newEmail " type="email" required
-                                      placeholder="Enter le mail"></b-form-input>
-                        <b-form-input id="input-1" v-model="newPassword" type="password" required
-                                      placeholder="Enter le mot de passe"></b-form-input>
+                <b-col md="6" offset-md="3">
+                    <div style="margin-top: 10px" v-if="clickCreer">
+                        <h2>Creating a new user</h2>
+                        <b-form-group label-cols="6" label-cols-lg="6"  label="First name:" >
+                            <b-form-input  v-model="newFirstname " required
+                                          placeholder="Enter the first name"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label-cols="6" label-cols-lg="6"  label="Last name:" >
+                            <b-form-input id="input-1" v-model="newLastname " required
+                                          placeholder="Enter the last name"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label-cols="6" label-cols-lg="6"  label="Email:" >
+                            <b-form-input id="input-1" v-model="newEmail " type="email" required
+                                          placeholder="Enter the email"></b-form-input>
+                        </b-form-group>
+                        <b-form-group label-cols="6" label-cols-lg="6"  label="Password:" >
+                            <b-form-input id="input-1" v-model="newPassword" type="password" required
+                                          placeholder="Enter the password"></b-form-input>
+                        </b-form-group>
+
                         <br><b-button @click="newUser()" variant="success">Valider</b-button>
+                    </div>
+                    <div style="margin-top: 10px" v-if="clickCreerTeam">
+                        <h2>Creating a new Team</h2>
+                        <b-form-group label-cols="6" label-cols-lg="6"  label="Name of the team:" >
+                            <b-form-input  v-model="newTeamName " required
+                                          placeholder="Enter the first name"></b-form-input>
+                        </b-form-group>
+
+                        <br><b-button @click="newTeam()" variant="success">Valider</b-button>
                     </div>
                     <div v-if="clickRecherche">
                         <br><br>
@@ -32,19 +39,29 @@
                         <br><b-button variant="info">Valider</b-button>
                     </div>
                     <div v-if="clickModif">
-                        <b-form-input id="input-1" v-model="this.userConnectFirst" required
-                                      placeholder="Enter le prenom"></b-form-input>
-                        <b-form-input id="input-1" v-model="this.userConnectLast" required
-                                      placeholder="Enter le nom"></b-form-input>
-                        <b-form-input id="input-1" v-model="this.userConnectEmail" type="email" required
-                                      placeholder="Enter le mail"></b-form-input>
-                        <b-form-input id="input-1" v-model="this.userConnectPassword" type="password" required
-                                      placeholder="Enter le mot de passe"></b-form-input>
-                        <br><b-button variant="warning">Valider</b-button>
+                            <h2>Modify my profil</h2>
+                            <b-form-group label-cols="6" label-cols-lg="6"  label="First name:" >
+                                <b-form-input  v-model="this.userConnectFirst " required
+                                               placeholder="Enter the first name"></b-form-input>
+                            </b-form-group>
+                            <b-form-group label-cols="6" label-cols-lg="6"  label="Last name:" >
+                                <b-form-input id="input-1" v-model="this.userConnectLast " required
+                                              placeholder="Enter the last name"></b-form-input>
+                            </b-form-group>
+                            <b-form-group label-cols="6" label-cols-lg="6"  label="Email:" >
+                                <b-form-input id="input-1" v-model="this.userConnectEmail " type="email" required
+                                              placeholder="Enter the email"></b-form-input>
+                            </b-form-group>
+                            <b-form-group label-cols="6" label-cols-lg="6"  label="Password:" >
+                                <b-form-input id="input-1" v-model="this.userConnectPassword" type="password" required
+                                              placeholder="Enter the password"></b-form-input>
+                            </b-form-group>
+
+                            <br><b-button @click="updateUser()" variant="warning">Valider</b-button>
+
                     </div>
                 </b-col>
             </b-row>
-        </b-container>
 
 
     </div>
@@ -52,11 +69,14 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: "User",
         data() {
             return {
-                clickCreer: false,
+                clickCreer: true,
+                clickCreerTeam: false,
                 clickRecherche: false,
                 clickModif: false,
                 userConnectFirst: "Yoel",
@@ -72,66 +92,110 @@
                 updateLastname :"",
                 updateEmail :"",
                 updatePassword :"",
+                newTeamName :"",
             };
-        },mounted() {
-            const axios = require('axios');
-            axios
-                .get('http://localhost:4000/api/users/1')
+        },
+        mounted() {
+            console.log("test")
+
+            axios.get('http://localhost:4000/api/users/1')
                 .then(response => {
                     this.userConnectFirst = response.data.data.user
                     this.userConnectEmail = response.data.data.email
                 })
+
+
+
+            this.$root.$on('funCreerUser', () => {
+                this.funCreerUser()
+            })
+            this.$root.$on('funCreerTeam', () => {
+                this.funCreerTeam()
+            })
+            this.$root.$on('funModif', () => {
+                this.funModif()
+            })
+            this.$root.$on('funRecherche', () => {
+                this.funRecherche()
+            })
         },
         methods: {
+            makeToast(variant,title,msg) {
+                this.$bvToast.toast(msg, {
+                    title: `${title}`,
+                    variant: variant,
+                    solid: true
+                })
+            },
             newUser() {
-                const axios = require('axios');
-                axios
-                    .post('http://localhost:4000/api/users',
-                       {
-                            users:{
-                                "email":this.newEmail,
-                                //"username": this.newFirstname
-                                "firstname": this.newFirstname,
-                               "lastname": this.newLastname,
-                               "password": this.newPassword,
+                if (this.newEmail !=="" && this.newFirstname !=="" && this.newLastname !=="" && this.newPassword !==""){
+                    axios.post('http://localhost:4000/api/users',{
+                        users:{
+                            "email":this.newEmail,
+                            "firstname": this.newFirstname,
+                            "lastname": this.newLastname,
+                            "password": this.newPassword,
+                            "roles": 2
+                        }
+                    })
+                        .then(()=>{
+                            this.makeToast('success','Creating success','New user create')
+                        })
+                } else this.makeToast('danger','Creating fail','Check that all fields are filled')
+
+            },
+            newTeam() {
+                if (this.newTeamName !=="" ) {
+                    axios.post('http://localhost:4000/api/teams',
+                        {
+                            teams: {
+                                "name": this.newTeamName,
                             }
                         }
-                    )
+                    ).then(()=>{
+                        this.makeToast('success','Creating success','New team create')
+                    })
+                }else this.makeToast('danger','Creating fail','Check that all fields are filled')
             },
             updateUser() {
-                const axios = require('axios');
+
 
                     this.updateFirstname = this.userConnectFirst,
                     this.updateLastname = this.userConnectLast,
                     this.updateEmail = this.userConnectEmail,
                     this.updatePassword = this.userConnectPassword,
 
-                axios
-                    .put('http://localhost:4000/api/users/1',
+                axios.put('http://localhost:4000/api/users/1',
                        {
                             users:{
                                 "email":this.updateEmail,
-                                "username": this.updateFirstname
-                                //"firstname": this.updateFirstname
-                              // "lastname": this.updateLastname
-                              // "password": this.updatePassword
+                                "firstname": this.updateFirstname,
+                               "lastname": this.updateLastname,
+                               "password": this.updatePassword
                             }
                         }
                     )
             },
-            funCreer() {
-                this.clickCreer = true,
+            clearVar(){
+                this.clickCreer = false,
                 this.clickRecherche = false,
+                this.clickCreerTeam = false,
                 this.clickModif = false
+            },
+            funCreerUser() {
+                this.clearVar(),
+                this.clickCreer = true
+            },
+            funCreerTeam() {
+                this.clearVar(),
+                this.clickCreerTeam = true
             },
             funRecherche() {
-                this.clickCreer = false,
-                this.clickRecherche = true,
-                this.clickModif = false
+                this.clearVar(),
+                this.clickRecherche = true
             },
             funModif() {
-                this.clickCreer = false,
-                this.clickRecherche = false,
+                this.clearVar(),
                 this.clickModif = true
             },
         }
@@ -141,3 +205,4 @@
 <style scoped>
 
 </style>
+

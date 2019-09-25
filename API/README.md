@@ -1,14 +1,27 @@
 # Worktime
 
-To start your Phoenix server:
+Pour démarrer l'API:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+  * Installer les dépendances `mix deps.get`
+    * Si db déjà créer, la supprimer `mix ecto.drop`
+  * Créer base de donnée `mix ecto.create`
+  * Mettre à jour la db `mix ecto.migrate`
+  * Démarrer le serveur phoenix `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+##Au démarrage
+
+3 rôles sont créer par défaut:
+
+  * 1 : Manager
+  * 2 : Employe
+  * 3 : Administrateur
+  
+ Ainsi qu'un utilisateur Admin avec:
+ 
+  * Email: "admin@gmail.com"
+  * Password: "admin"
 
 ## Learn more
 

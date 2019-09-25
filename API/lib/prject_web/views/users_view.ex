@@ -1,16 +1,29 @@
 defmodule WorktimeWeb.UsersView do
   use WorktimeWeb, :view
   alias WorktimeWeb.UsersView
+  alias Worktime.Repo
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, UsersView, "users.json")}
+    %{data: render_many(users, UsersView, "userteams.json")}
   end
 
   def render("show.json", %{users: users}) do
-    %{data: render_one(users, UsersView, "users.json")}
+    %{data: render_one(users, UsersView, "userteams.json")}
   end
 
   def render("users.json", %{users: users}) do
-    %{id: users.id, user: users.username, email: users.email}
+    %{id: users.id, user: users.lastname, email: users.email}
+  end
+
+  def render("userteams.json", %{users: user}) do
+    users = Repo.preload(user, [:teams])
+    list = Enum.map(users.teams, fn t ->
+      %{id: t.id, name: t.name}
+    end)
+    %{id: users.id, name: users.lastname, email: users.email, team: list}
+  end
+
+  def render("wrongmail.json", res) do
+    %{error: Map.get(res, "rep")}
   end
 end

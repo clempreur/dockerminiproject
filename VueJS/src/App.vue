@@ -1,57 +1,57 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/téléchargement.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div >
+    <img style="margin-top: 10px;margin-left: 45%" alt="Vue logo" src="./assets/logo1.png">
 
-    <b-container class="bv-example-row" >
-      <b-row>
-        <b-col>
-          <User msg="Welcome to Your Vue.js App"/>
-        </b-col>
-        <b-col>
-          <ClockManager/>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <ChartManager />
-        </b-col>
-        <b-col>
-          <WorkingTimes />
-        </b-col>
-      </b-row>
-    </b-container>
+    <BaseFront></BaseFront>
+
+    <router-view></router-view>
 
   </div>
 </template>
 
+
+
+
 <script>
+/*
 import User from './components/User.vue'
 import ChartManager from "@/components/ChartManager";
-import WorkingTime from "@/components/WorkingTime";
+import HelloWorld from "@/components/HelloWorld";
 import WorkingTimes from "@/components/WorkingTimes";
 import ClockManager from "@/components/ClockManager";
+*/
+import BaseFront from "@/components/BaseFront";
 
 export default {
   name: 'app',
   components: {
+    /*
     ClockManager,
     WorkingTimes,
-    WorkingTime,
+    //HelloWorld,
     ChartManager,
-    User
+    User,*/
+    BaseFront,
+
+  },
+  mounted(){},
+  methods: {
+    funModif() {
+      this.$refs.form.funModif()
+    },
+    funRecherche() {
+      this.$refs.form.funRecherche()
+    },
+    funCreerUser() {
+      this.$refs.form.funCreerUser()
+    },
+    funCreerTeam() {
+      this.$refs.form.funCreerTeam()
+    },
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.col { border: 1px solid transparent; }
+
 </style>

@@ -3,11 +3,11 @@ defmodule Worktime.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :username, :string, null: false
+      add :firstname, :string, null: false
+      add :lastname, :string, null: false
+      add :password, :string, null: false
       add :email, :string, null: false
-
-      timestamps()
+      add :timeByMonth, :integer, null: false
     end
-
   end
 end
