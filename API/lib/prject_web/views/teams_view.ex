@@ -12,7 +12,11 @@ defmodule WorktimeWeb.TeamsView do
   end
 
   def render("teams.json", %{teams: teams}) do
-    %{id: teams.id, name: teams.name}
+    teams = Repo.preload(teams, [:users])
+    list = Enum.map(teams.users, fn u ->
+      %{id: u.id, email: u.email, firstname: u.firstname, lastname: u.lastname,role: u.roles_id}
+    end)
+    %{id: teams.id, name: teams.name, users: list}
   end
 
   def render("teamsdetail.json", %{teams: teams}) do
@@ -21,9 +25,5 @@ defmodule WorktimeWeb.TeamsView do
       %{id: u.id, email: u.email, name: u.firstname}
     end)
     %{id: teams.id, name: teams.name, users: list}
-  end
-
-  def render("wrongteams.json", res) do
-    %{error: Map.get(res, "rep")}
   end
 end

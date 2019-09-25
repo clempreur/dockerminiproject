@@ -11,6 +11,6 @@ defmodule WorktimeWeb.ClocksView do
   end
 
   def render("clocks.json", %{clocks: clocks}) do
-    %{id: clocks.id, time: clocks.time}
+    %{id: clocks.id, status: clocks.status ,time: clocks.time}
   end
 end

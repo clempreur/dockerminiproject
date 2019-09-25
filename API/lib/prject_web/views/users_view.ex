@@ -15,15 +15,11 @@ defmodule WorktimeWeb.UsersView do
     %{id: users.id, user: users.lastname, email: users.email}
   end
 
-  def render("userteams.json", %{users: user}) do
-    users = Repo.preload(user, [:teams])
-    list = Enum.map(users.teams, fn t ->
-      %{id: t.id, name: t.name}
-    end)
-    %{id: users.id, name: users.lastname, email: users.email, team: list}
-  end
-
-  def render("wrongmail.json", res) do
-    %{error: Map.get(res, "rep")}
-  end
+    def render("userteams.json", %{users: user}) do
+      users = Repo.preload(user, [:teams])
+      list = Enum.map(users.teams, fn t ->
+        %{id: t.id, name: t.name}
+      end)
+      %{id: users.id, lastname: users.lastname,firstname: users.firstname ,role: users.roles_id,email: users.email,password: users.password, team: list}
+    end
 end
