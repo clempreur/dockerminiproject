@@ -26,4 +26,8 @@ defmodule WorktimeWeb.TeamsView do
     end)
     %{id: teams.id, name: teams.name, users: list}
   end
+
+  def render("wrongteams.json", res) do
+    %{error: Map.get(res, "rep")}
+  end
 end

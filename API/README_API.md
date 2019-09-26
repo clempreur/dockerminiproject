@@ -66,8 +66,8 @@ POST http://localhost:4000/api/users/sign_up
 		"firstname": "Thomas",
 		"lastname": "Ferrand",
 		"password": "1234",
-        "timeByMonth": 35
-        "roles": 2
+        "timeByMonth": 35,
+        "roles_id": 2
 	}
 }
 ```
@@ -83,7 +83,7 @@ PUT http://localhost:4000/api/users/update/:id
 		"firstname": "Thomas",
 		"lastname": "Ferrand",
 		"password": "1234",
-        "roles": 2
+        "timeByMonth": 35
 	}
 }
 ```
@@ -101,7 +101,7 @@ PUT http://localhost:4000/api/users/promote
 "Content-Type: application/json" 
 {
 	"id": idUser
-    "roles": 2
+    "role": 2
 }
 ```
 
@@ -225,5 +225,16 @@ PUT http://localhost:4000/api/teams/change_user
 {
 	"id": idTeams,
 	"users": [idUser1, idUser2]
+}
+```
+ 
+### Changer le manager d'une team
+ 
+```shell
+PUT http://localhost:4000/api/teams/change_manager
+"Content-Type: application/json" 
+{
+	"id": idTeams,
+	"managerID": idManager
 }
 ```

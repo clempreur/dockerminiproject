@@ -15,7 +15,7 @@ defmodule WorktimeWeb.Router do
       get "/users/search_user", UsersController, :bynameorlastname
       post "/users/sign_up", UsersController, :create
       put "/users/update/:id", UsersController, :update
-    put "/users/promote", UsersController, :promote
+      put "/users/promote", UsersController, :promote
     resources "/roles", RolesController, only: [:create, :show, :delete]
     resources "/workingtimes", WorkingtimesController, only: [:update, :delete]
     options "/workingtimes", WorkingtimesController, :options 
@@ -29,6 +29,7 @@ defmodule WorktimeWeb.Router do
       put "/teams/add_user", TeamsController, :addusertoteam
       put "/teams/suppr_user", TeamsController, :suppruserofteam
       put "/teams/change_user", TeamsController, :changeuserofteam
+      put "/teams/change_manager", TeamsController, :changemanagerofteam
       options   "/teams/", TeamsController, :options
 
   end

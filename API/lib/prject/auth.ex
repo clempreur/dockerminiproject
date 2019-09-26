@@ -599,14 +599,10 @@ defmodule Worktime.Auth do
   def update_teams_add(%Teams{} = teams, users) do
     team = Repo.preload(teams, [:users])
     list_users = team.users ++ Enum.map(users, fn u -> Repo.get(Users, u) end)
-    if control_teams_manag(list_users) do
-      team
-      |> Ecto.Changeset.change()
-      |> Ecto.Changeset.put_assoc(:users, list_users)
-      |> Repo.update()
-    else
-      %{"rep" => "Il y ne doit y avoir qu'un seul manager par team."}
-    end
+
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:users, list_users)
+    |> Repo.update()
   end
 
   def update_teams_suppr(teamId, list_users) do
@@ -627,13 +623,20 @@ defmodule Worktime.Auth do
     team = Repo.preload(teams, [:users])
     list_users = Enum.map(users, fn u -> Repo.get(Users, u) end)
 
-    if control_teams_manag(list_users) do
-      team
-      |> Ecto.Changeset.change()
-      |> Ecto.Changeset.put_assoc(:users, list_users)
-      |> Repo.update()
+    team
+    |> Ecto.Changeset.change()
+    |> Ecto.Changeset.put_assoc(:users, list_users)
+    |> Repo.update()
+  end
+
+  def change_teams_manager(teams, managerID) do
+    user = Repo.get(Users, managerID)
+    if user.roles_id == 2 do
+      %{"rep" => "Ce salarié ne peut pas être manager"}
     else
-      %{"rep" => "Il y ne doit y avoir qu'un seul manager par team."}
+         teams
+         |> Teams.changeset(%{"manager_id" => managerID})
+         |> Repo.update()
     end
   end
 
@@ -657,29 +660,6 @@ defmodule Worktime.Auth do
     |> Ecto.Changeset.put_assoc(:users, [])
     |> Repo.update!()
     Repo.delete(teams)
-  end
-
-  @doc """
-  Vérifie qu'il n'y a qu'un seul manager par team.
-
-  ## Examples
-
-      iex> control_teams_manag(listTrueUser)
-      true
-
-      iex> control_teams_manag(listFalseUser)
-      false
-
-  """
-  def control_teams_manag(list_users) do
-    list = Enum.filter(list_users, fn u ->
-      u.roles_id == 1
-    end)
-    if List.first(list) do
-      List.first(list).id == List.last(list).id
-    else
-      true
-    end
   end
 
   @doc """

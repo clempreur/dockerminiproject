@@ -23,6 +23,40 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
   * Email: "admin@gmail.com"
   * Password: "admin"
 
+## Detail des tables
+
+  * Users:
+    * firstname     :string
+    * lastname      :string
+    * password      :string
+    * email         :string
+    * timeByMonth   :integer
+    * roles_id      :integer
+    * clocks        tableau d'objet Clocks
+    * workingtimes  tableau d'objet Workingtimes
+    * roles         tableau d'objet Roles
+    * team          tableau d'objet Team
+
+  * Clocks:
+    * time          :string
+    * status        :boolean
+    * users         tableau d'objet Users
+
+  * Workingtimes:
+    * end           :string
+    * start         :string
+    * users         tableau d'objet Users
+
+  * roles:
+    * label         :string
+    * status        :integer
+    * users         tableau d'objet Users
+
+  * teams:
+    * name          :string
+    * manager_id    :integer
+    * users         tableau d'objet Users
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/

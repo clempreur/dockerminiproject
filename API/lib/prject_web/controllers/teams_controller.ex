@@ -59,4 +59,14 @@ defmodule WorktimeWeb.TeamsController do
       {:error, render(conn, "wrongteams.json", message)}
     end
   end
+
+  def changemanagerofteam(conn, %{"id" => id, "managerID" => managerID}) do
+    teams = Auth.get_teams!(id)
+
+    with {:ok, %Teams{}} <- Auth.change_teams_manager(teams, managerID) do
+      render(conn, "teamsdetail.json", teams: teams)
+    else message ->
+      {:error, render(conn, "wrongteams.json", message)}
+    end
+  end
 end
