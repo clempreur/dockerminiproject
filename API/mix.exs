@@ -39,9 +39,10 @@ defmodule Worktime.MixProject do
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
       {:plug, "~> 1.0"},
-      {:corsica, "~> 1.0"},
+#      {:corsica, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:cors_plug, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end
