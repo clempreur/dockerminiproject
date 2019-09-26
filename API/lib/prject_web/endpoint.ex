@@ -40,5 +40,7 @@ defmodule WorktimeWeb.Endpoint do
     key: "_prject_key",
     signing_salt: "c6A/pCQ3"
 
+#  plug CORSPlug, origin: "*" #j'ai autoriser toutes adresses
+  plug Corsica, origins: "*"
   plug WorktimeWeb.Router
 end

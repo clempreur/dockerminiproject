@@ -179,6 +179,7 @@ DELETE http://localhost:4000/api/workingtimes/:id
  
 ### Créer une team
  
+L'utilisateur indiquer comme manager d'équipe est automatiquement rajouter à l'équipe
 ```shell
 POST http://localhost:4000/api/teams
 "Content-Type: application/json" 

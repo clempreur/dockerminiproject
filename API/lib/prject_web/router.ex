@@ -2,15 +2,14 @@ defmodule WorktimeWeb.Router do
   use WorktimeWeb, :router
 
   pipeline :api do
-    plug CORSPlug, origin: "*" #j'ai autoriser toutes adresses
     plug :accepts, ["json"]
   end
 
   scope "/api", WorktimeWeb do
     pipe_through :api
     resources "/users", UsersController, except: [:new, :edit, :show, :update]
-    options   "/users", UsersController, :options 
-    get "/users/by_id", UsersController, :show
+      options "/users", UsersController, :options
+      get "/users/by_id", UsersController, :show
       get "/users/sign_in", UsersController, :emailandpassword
       get "/users/search_user", UsersController, :bynameorlastname
       post "/users/sign_up", UsersController, :create

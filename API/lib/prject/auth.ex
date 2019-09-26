@@ -600,6 +600,7 @@ defmodule Worktime.Auth do
     team = Repo.preload(teams, [:users])
     list_users = team.users ++ Enum.map(users, fn u -> Repo.get(Users, u) end)
 
+    team
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.put_assoc(:users, list_users)
     |> Repo.update()

@@ -18,6 +18,10 @@ defmodule WorktimeWeb.TeamsController do
 
   def create(conn, %{"teams" => teams_params}) do
     with {:ok, %Teams{} = teams} <- Auth.create_teams(teams_params) do
+      if teams.manager_id do
+        Auth.update_teams_add(teams, [teams.manager_id])
+      end
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.teams_path(conn, :show, teams))

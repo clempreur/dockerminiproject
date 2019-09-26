@@ -65,5 +65,20 @@
     <orderEntry type="library" name="earmark" level="project" />
     <orderEntry type="library" name="cors_plug" level="project" />
     <orderEntry type="library" name="mix_test_watch" level="project" />
+    <orderEntry type="library" name="joken" level="project" />
+    <orderEntry type="library" name="jose" level="project" />
+    <orderEntry type="library" name="dialyxir" level="project" />
+    <orderEntry type="library" name="credo" level="project" />
+    <orderEntry type="library" name="junit_formatter" level="project" />
+    <orderEntry type="library" name="stream_data" level="project" />
+    <orderEntry type="library" name="excoveralls" level="project" />
+    <orderEntry type="library" name="base64url" level="project" />
+    <orderEntry type="library" name="jsone" level="project" />
+    <orderEntry type="library" name="jsx" level="project" />
+    <orderEntry type="library" name="libdecaf" level="project" />
+    <orderEntry type="library" name="libsodium" level="project" />
+    <orderEntry type="library" name="ojson" level="project" />
+    <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="corsica" level="project" />
   </component>
 </module>
