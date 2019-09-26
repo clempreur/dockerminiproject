@@ -7,7 +7,7 @@ do
   echo "$(date) - waiting for database to start"
   sleep 2
 done
-
+mix local.rebar --force
 mix ecto.drop
 mix ecto.create
 mix ecto.migrate
