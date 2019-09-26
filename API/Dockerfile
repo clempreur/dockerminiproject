@@ -12,6 +12,7 @@ WORKDIR /app
 
 # Install hex package manager
 RUN mix local.hex --force
+RUN mix local.rebar --force
 
 #Get dependancies
 RUN mix deps.get

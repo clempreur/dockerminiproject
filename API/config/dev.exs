@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :prject, Worktime.Repo,
   username: "postgres",
-  password: "postgres", #rajouter mot de passe
+  password: "Croissance69", #rajouter mot de passe
   database: "mini",
   hostname: "db",
   show_sensitive_data_on_connection_error: true,

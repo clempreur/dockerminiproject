@@ -2,7 +2,7 @@ defmodule WorktimeWeb.Router do
   use WorktimeWeb, :router
 
   pipeline :api do
-    plug CORSPlug, origin: "*", methods: ["GET", "POST", "PUT"] #j'ai autoriser toutes adresses
+    plug CORSPlug, origin: "*", methods: ["GET", "POST", "PUT", "OPTIONS"] #j'ai autoriser toutes adresses
     plug :accepts, ["json"]
   end
 

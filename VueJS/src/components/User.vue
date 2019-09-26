@@ -41,7 +41,7 @@
                     <div v-if="clickModif">
                             <h2>Modify my profil</h2>
                             <b-form-group label-cols="6" label-cols-lg="6"  label="First name:" >
-                                <b-form-input  v-model="this.userConnectFirst " required
+                                <b-form-input  :value="this.userConnectFirst " required
                                                placeholder="Enter the first name"></b-form-input>
                             </b-form-group>
                             <b-form-group label-cols="6" label-cols-lg="6"  label="Last name:" >
@@ -98,10 +98,12 @@
         mounted() {
             console.log("test")
 
-            axios.get('http://localhost:4000/api/users/1')
+            axios.get('http://54.174.174.127:4000/api/users/by_id?id=1')
                 .then(response => {
-                    this.userConnectFirst = response.data.data.user
-                    this.userConnectEmail = response.data.data.email
+                    this.userConnectFirst = response.data.user
+                    this.userConnectEmail = response.data.email
+                }).catch(err => {
+                    console.log(err)
                 })
 
 
@@ -129,17 +131,20 @@
             },
             newUser() {
                 if (this.newEmail !=="" && this.newFirstname !=="" && this.newLastname !=="" && this.newPassword !==""){
-                    axios.post('http://localhost:4000/api/users',{
+                    axios.post('http://54.174.174.127:4000/api/users/sign_up',{
                         users:{
                             "email":this.newEmail,
                             "firstname": this.newFirstname,
                             "lastname": this.newLastname,
                             "password": this.newPassword,
+                            "timeByMonth": 35,
                             "roles": 2
                         }
                     })
                         .then(()=>{
                             this.makeToast('success','Creating success','New user create')
+                        }).catch(error => {
+	                        console.log(error)
                         })
                 } else this.makeToast('danger','Creating fail','Check that all fields are filled')
 
@@ -165,13 +170,14 @@
                     this.updateEmail = this.userConnectEmail,
                     this.updatePassword = this.userConnectPassword,
 
-                axios.put('http://localhost:4000/api/users/1',
+                axios.put('http://54.174.174.127:4000/api/users/update/1',
                        {
                             users:{
                                 "email":this.updateEmail,
                                 "firstname": this.updateFirstname,
                                "lastname": this.updateLastname,
-                               "password": this.updatePassword
+                               "password": this.updatePassword,
+                                "timeByMonth": 35
                             }
                         }
                     )
