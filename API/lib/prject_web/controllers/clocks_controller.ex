@@ -15,7 +15,10 @@ defmodule WorktimeWeb.ClocksController do
   end
 
   def show(conn, %{"id" => id}) do
-    clocks = Auth.get_users_clock(id)
-    render(conn, "index.json", clocks: clocks)
+    with {:ok, clocks} <- Auth.get_users_clock(id) do
+      render(conn, "index.json", clocks: clocks)
+    else message ->
+      render(conn, "wrongclocks.json", message)
+    end
   end
 end

@@ -13,4 +13,8 @@ defmodule WorktimeWeb.ClocksView do
   def render("clocks.json", %{clocks: clocks}) do
     %{id: clocks.id, status: clocks.status ,time: clocks.time}
   end
+
+  def render("wrongclocks.json", res) do
+    %{error: Map.get(res, "rep")}
+  end
 end

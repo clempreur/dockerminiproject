@@ -119,12 +119,17 @@ defmodule Worktime.Auth do
 
   """
   def get_users_clock(id) do
-    user = Repo.one from u in Users,
-             join: c in assoc(u, :clocks),
-             where: u.id == ^id,
-             preload: [ clocks: c],
-             select: u
-    user.clocks
+    use = Repo.one from u in Users, where: u.id == ^id, select: u
+    if use do
+      user = Repo.preload(use, [:clocks])
+      if List.first(user.clocks) do
+        {:ok, user.clocks}
+      else
+        %{"rep" => "Pas  d'heure de pointage"}
+      end
+    else
+      %{"rep" => "Utilisateur incorrect"}
+    end
   end
 
 
