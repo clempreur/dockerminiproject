@@ -33,4 +33,4 @@ import_config "#{Mix.env()}.exs"
 config :cors_plug,
        origin: "*",
        max_age: 300000,
-       methods: ["GET", "POST", "PUT", "OPTIONS"]
+       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]

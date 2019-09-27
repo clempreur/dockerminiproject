@@ -75,7 +75,7 @@ POST http://localhost:4000/api/users/sign_up
 ### Mettre à jour un utilisateur
 
 ```shell
-PUT http://localhost:4000/api/users/update/:id
+PUT http://localhost:4000/api/users/update  
 "Content-Type: application/json" 
 {
 	"users": {
@@ -83,8 +83,10 @@ PUT http://localhost:4000/api/users/update/:id
 		"firstname": "Thomas",
 		"lastname": "Ferrand",
 		"password": "1234",
-        "timeByMonth": 35
-	}
+        "timeByMonth": 35,
+        "roles_id": 2
+	},
+    "id": idUser
 }
 ```
  
