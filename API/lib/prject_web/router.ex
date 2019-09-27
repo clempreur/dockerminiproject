@@ -15,7 +15,7 @@ defmodule WorktimeWeb.Router do
       get "/users/search_user", UsersController, :bynameorlastname
       options "/users/sign_up", UsersController, :options
       post "/users/sign_up", UsersController, :create
-      options "/users/update", UsersController, :options
+      options "/users/update/:id", UsersController, :options
       put "/users/update/:id", UsersController, :update
       options "/users/promote", UsersController, :options
       put "/users/promote", UsersController, :promote
