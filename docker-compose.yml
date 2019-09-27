@@ -11,7 +11,7 @@ services:
     environment:
       # Variables to connect to our Postgres server
       PGUSER: postgres
-      PGPASSWORD: Croissance69
+      PGPASSWORD: postgres
       PGDATABASE: mini
       PGPORT: 5432
       # Hostname of our Postgres container
