@@ -2,7 +2,7 @@ defmodule WorktimeWeb.Router do
   use WorktimeWeb, :router
 
   pipeline :api do
-    plug CORSPlug, origin: "*", methods: ["GET", "POST", "PUT", "OPTIONS"] #j'ai autoriser toutes adresses
+	  plug CORSPlug, origin: "http://localhost:8080"
     plug :accepts, ["json"]
   end
 
@@ -23,7 +23,7 @@ defmodule WorktimeWeb.Router do
       get "/workingtimes/:userID/:workingtimeID", WorkingtimesController, :workingtimesID
       post "/workingtimes", WorkingtimesController, :postworkingtimes
     resources "/clocks", ClocksController, only: [:show]
-    options   "/clocks", ClocksController, :options
+#    options   "/clocks", ClocksController, :options
     post "/clocks", ClocksController, :clockspostid
     resources "/teams", TeamsController, only: [:create, :index, :show, :delete]
       put "/teams/add_user", TeamsController, :addusertoteam
