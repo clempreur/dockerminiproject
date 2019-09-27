@@ -13,17 +13,20 @@ defmodule WorktimeWeb.Router do
       get "/users/by_id", UsersController, :show
       get "/users/sign_in", UsersController, :emailandpassword
       get "/users/search_user", UsersController, :bynameorlastname
+      options "/users/sign_up", UsersController, :options
       post "/users/sign_up", UsersController, :create
+      options "/users/update", UsersController, :options
       put "/users/update/:id", UsersController, :update
+      options "/users/promote", UsersController, :options
       put "/users/promote", UsersController, :promote
     resources "/roles", RolesController, only: [:create, :show, :delete]
     resources "/workingtimes", WorkingtimesController, only: [:update, :delete]
-    options "/workingtimes", WorkingtimesController, :options 
-    get "/workingtimes/:userID", WorkingtimesController, :workingtimesgetall
+      options "/workingtimes", WorkingtimesController, :options
+      get "/workingtimes/:userID", WorkingtimesController, :workingtimesgetall
       get "/workingtimes/:userID/:workingtimeID", WorkingtimesController, :workingtimesID
       post "/workingtimes", WorkingtimesController, :postworkingtimes
     resources "/clocks", ClocksController, only: [:show]
-      options   "/clocks", ClocksController, :options
+      options "/clocks", ClocksController, :options
       post "/clocks", ClocksController, :clockspostid
     resources "/teams", TeamsController, only: [:create, :index, :show, :delete]
       put "/teams/add_user", TeamsController, :addusertoteam
