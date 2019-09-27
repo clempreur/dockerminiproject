@@ -23,8 +23,8 @@ defmodule WorktimeWeb.Router do
       get "/workingtimes/:userID/:workingtimeID", WorkingtimesController, :workingtimesID
       post "/workingtimes", WorkingtimesController, :postworkingtimes
     resources "/clocks", ClocksController, only: [:show]
-#    options   "/clocks", ClocksController, :options
-    post "/clocks", ClocksController, :clockspostid
+      options   "/clocks", ClocksController, :options
+      post "/clocks", ClocksController, :clockspostid
     resources "/teams", TeamsController, only: [:create, :index, :show, :delete]
       put "/teams/add_user", TeamsController, :addusertoteam
       put "/teams/suppr_user", TeamsController, :suppruserofteam
