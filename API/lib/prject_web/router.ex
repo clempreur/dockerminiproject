@@ -29,11 +29,12 @@ defmodule WorktimeWeb.Router do
       options "/clocks", ClocksController, :options
       post "/clocks", ClocksController, :clockspostid
     resources "/teams", TeamsController, only: [:create, :index, :show, :delete]
+      options "/teams/add_user", TeamsController, :options
       put "/teams/add_user", TeamsController, :addusertoteam
       put "/teams/suppr_user", TeamsController, :suppruserofteam
       put "/teams/change_user", TeamsController, :changeuserofteam
       put "/teams/change_manager", TeamsController, :changemanagerofteam
-      options   "/teams/", TeamsController, :options
+      options "/teams/", TeamsController, :options
 
   end
 end
